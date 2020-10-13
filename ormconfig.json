@@ -5,7 +5,7 @@
   "username": "postgres",
   "password": "postgres",
   "database": "gostack_gobarber",
-  "entities": ["./src/models/*.ts"],
+  "entities": ["./src/modules/users/infra/typeorm/entities/*.ts", "./src/modules/appointments/infra/typeorm/entities/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/database/migrations"
