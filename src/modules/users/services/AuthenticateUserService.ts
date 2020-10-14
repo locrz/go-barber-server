@@ -1,5 +1,6 @@
 import { sign } from "jsonwebtoken";
 import { compare } from "bcryptjs";
+import { injectable, inject } from "tsyringe";
 
 import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "../infra/typeorm/repositories/UsersRepository";
@@ -17,8 +18,12 @@ interface Response {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository
+  ) {}
 
   public async execute({ email, password }: Request): Promise<Response> {
     const user = await this.usersRepository.findByEmail(email);
