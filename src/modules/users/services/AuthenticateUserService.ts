@@ -3,7 +3,7 @@ import { compare } from "bcryptjs";
 import { injectable, inject } from "tsyringe";
 
 import User from "../infra/typeorm/entities/User";
-import IUsersRepository from "../infra/typeorm/repositories/UsersRepository";
+import IUsersRepository from "../repositories/IUserRepository";
 
 import AppError from "@shared/errors/AppError";
 import authConfig from "@config/auth";
