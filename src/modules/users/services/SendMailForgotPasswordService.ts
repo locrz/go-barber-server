@@ -30,10 +30,21 @@ class CreateUserService {
 
     const { token } = await this.userTokensRepository.generate(findUser.id);
 
-    await this.mailProvider.sendMail(
-      email,
-      `Pedido de recuperação de senha recebido: ${token}`
-    );
+    await this.mailProvider.sendMail({
+      to: {
+        name: findUser.name,
+        address: findUser.email,
+      },
+      subject: "[GoBarber] Recuperação de senha",
+      templateData: {
+        template:
+          "Olá {{name}}, o seu token de recuperação de senha é {{token}}",
+        variables: {
+          name: findUser.name,
+          token,
+        },
+      },
+    });
   }
 }
 
