@@ -28,11 +28,11 @@ class CreateUserService {
       throw new AppError("User not found with given e-mail.");
     }
 
-    await this.userTokensRepository.generate(findUser.id);
+    const { token } = await this.userTokensRepository.generate(findUser.id);
 
-    this.mailProvider.sendMail(
+    await this.mailProvider.sendMail(
       email,
-      "Recebido email para recuperação de senha"
+      `Pedido de recuperação de senha recebido: ${token}`
     );
   }
 }
