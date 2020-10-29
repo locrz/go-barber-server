@@ -10,7 +10,7 @@ interface Request {
   user_id: string;
   name: string;
   email: string;
-  oldPassword?: string;
+  old_password?: string;
   password?: string;
 }
 
@@ -20,7 +20,7 @@ class UpdateProfileService {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
 
-    @inject("StorageProvider")
+    @inject("HashProvider")
     private hashProvider: IHashProvider
   ) {}
 
@@ -29,7 +29,7 @@ class UpdateProfileService {
     name,
     email,
     password,
-    oldPassword,
+    old_password,
   }: Request): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
@@ -49,16 +49,16 @@ class UpdateProfileService {
     user.email = email;
 
     if (password) {
-      if (!oldPassword) {
+      if (!old_password) {
         throw new AppError("You need to inform the old password.");
       }
 
-      const checkOldPassword = await this.hashProvider.compareHash(
-        oldPassword,
+      const checkold_password = await this.hashProvider.compareHash(
+        old_password,
         user.password
       );
 
-      if (!checkOldPassword) {
+      if (!checkold_password) {
         throw new AppError("The old password is wrong.");
       }
 

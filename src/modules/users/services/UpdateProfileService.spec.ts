@@ -78,7 +78,7 @@ describe("UpdateUserAvatar", () => {
       user_id: user.id,
       email: "lucas@cruz.com",
       name: "Lucas Oliveira",
-      oldPassword: "123123",
+      old_password: "123123",
       password: "5432321",
     });
 
@@ -99,7 +99,7 @@ describe("UpdateUserAvatar", () => {
         user_id: user.id,
         email: "lucas@cruz.com",
         name: "Lucas Oliveira",
-        oldPassword: "5432321",
+        old_password: "5432321",
         password: "5432321",
       })
     ).rejects.toBeInstanceOf(AppError);
