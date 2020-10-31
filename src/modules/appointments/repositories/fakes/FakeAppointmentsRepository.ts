@@ -18,7 +18,7 @@ class FakeAppointmentsRepository implements IAppointmentRepository {
     return findAppointment;
   }
 
-  public async findAllProviderDaysInMonth({
+  public async findAllInMonthFromProvider({
     provider_id,
     month,
     year,
