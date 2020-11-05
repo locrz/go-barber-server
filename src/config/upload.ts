@@ -11,8 +11,10 @@ export default {
   storage: multer.diskStorage({
     destination: tmpDir,
     filename(request, file, callback) {
+      const originalNameWithoutSpaces = file.originalname.replace(/\s/g, "");
+
       const fileHash = crypto.randomBytes(10).toString("hex");
-      const fileName = `${fileHash}-${file.originalname}`;
+      const fileName = `${fileHash}-${originalNameWithoutSpaces}`;
 
       return callback(null, fileName);
     },
