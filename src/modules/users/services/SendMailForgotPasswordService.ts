@@ -26,6 +26,7 @@ class CreateUserService {
     const findUser = await this.usersRepository.findByEmail(email);
 
     if (!findUser) {
+      console.log(email)
       throw new AppError("User not found with given e-mail.");
     }
 
@@ -48,7 +49,7 @@ class CreateUserService {
         file: forgotPasswordTemplate,
         variables: {
           name: findUser.name,
-          link: `${process.env.APP_WEB_URL}/reset_password?token=${token}`,
+          link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`,
         },
       },
     });
