@@ -3,7 +3,7 @@ import RedisCacheProvider from "./implementations/RedisCacheProvider";
 import ICacheProvider from "./models/ICacheProvider";
 
 const providers = {
-  redis: RedisCacheProvider,
+  redis: container.resolve(RedisCacheProvider),
 };
 
-container.registerSingleton<ICacheProvider>("CacheProvider", providers.redis);
+container.registerInstance<ICacheProvider>("CacheProvider", providers.redis);
